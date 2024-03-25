@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "empdatarestpy"
+version = "0.1.0"
+description = "Sample REST services for testing purposes, support GET, POST, UPDATE and DELTE  rest methods uses FLASK"
+authors = ["ShanKonduru <ShanKonduru@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Flask = "^3.0.2"
+requests = "^2.31.0"
+jsonify = "^0.5"
+
+[tool.poetry.group.dev.dependencies]
+jsonify = "^0.5"
+Flask = "^3.0.2"
+requests = "^2.31.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
