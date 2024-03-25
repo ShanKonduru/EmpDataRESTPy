@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "9306a3ee-80f9-43a2-a31b-2013884a0c54",
+		"name": "EmployeeDataPy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33837572"
+	},
+	"item": [
+		{
+			"name": "GetEmployeeCount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Response has count string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"count\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/employees/count",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"employees",
+						"count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllEmployees",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"// Parse the response body as JSON\r",
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"// Check if the response body is a JSON array\r",
+							"pm.test(\"Response body is a JSON array\", function () {\r",
+							"    pm.expect(jsonData).to.be.an('array');\r",
+							"});\r",
+							"\r",
+							"// Check the structure of each item in the JSON array\r",
+							"jsonData.forEach(function (employee) {\r",
+							"    pm.test(\"Employee has id, name, and department fields\", function () {\r",
+							"        pm.expect(employee).to.have.property('id');\r",
+							"        pm.expect(employee).to.have.property('name');\r",
+							"        pm.expect(employee).to.have.property('department');\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/employees",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEmployeeById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check the response status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Parse the response body as JSON\r",
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"// Check the structure of the JSON object\r",
+							"pm.test(\"Employee has id, name, and department fields\", function () {\r",
+							"    pm.expect(jsonData).to.have.property('id');\r",
+							"    pm.expect(jsonData).to.have.property('name');\r",
+							"    pm.expect(jsonData).to.have.property('department');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/employees/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"employees",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddNewEmployee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check the response status code\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// Parse the response body as JSON\r",
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"// Check the structure of the JSON object\r",
+							"pm.test(\"Employee has id, name, and department fields\", function () {\r",
+							"    pm.expect(jsonData).to.have.property('id');\r",
+							"    pm.expect(jsonData).to.have.property('name');\r",
+							"    pm.expect(jsonData).to.have.property('department');\r",
+							"});\r",
+							"\r",
+							"// Check the structure of the JSON object\r",
+							"pm.test(\"Employee has id, name, and department fields\", function () {\r",
+							"    pm.expect(jsonData).to.have.property('id');\r",
+							"    pm.expect(jsonData).to.have.property('name', 'Shan Konduru');\r",
+							"    pm.expect(jsonData).to.have.property('department', 'Global Delivery');\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Shan Konduru\",\r\n    \"department\": \"Global Delivery\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/employees",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateEmployee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check the response status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Parse the response body as JSON\r",
+							"try {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Check the structure of the JSON object\r",
+							"    pm.test(\"Employee has updated name and department\", function () {\r",
+							"        pm.expect(jsonData).to.have.property('name', 'Updated Test Employee');\r",
+							"        pm.expect(jsonData).to.have.property('department', 'Updated Test Department');\r",
+							"    });\r",
+							"} catch (e) {\r",
+							"    // If parsing as JSON fails, check if it's an HTML error page\r",
+							"    pm.test(\"Response is not an HTML error page\", function () {\r",
+							"        pm.expect(pm.response.text()).to.not.include('<!doctype html>');\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Ravi Bhushan Konduru\",\r\n    \"department\": \"Global Delivery\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/employees/16",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"employees",
+						"16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteEmployee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check the response status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Parse the response body as JSON\r",
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"// Check the response message\r",
+							"pm.test(\"Response contains 'Employee deleted' message\", function () {\r",
+							"    pm.expect(jsonData).to.have.property('message', 'Employee deleted');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/employees/16",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"employees",
+						"16"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
