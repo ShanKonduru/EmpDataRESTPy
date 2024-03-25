@@ -7,6 +7,18 @@ employees = [
     {"id": 1, "name": "John Doe", "department": "Engineering"},
     {"id": 2, "name": "Jane Smith", "department": "HR"},
     {"id": 3, "name": "Alice Johnson", "department": "Finance"},
+    {"id": 4, "name": "Bob Williams", "department": "Marketing"},
+    {"id": 5, "name": "Emily Brown", "department": "Sales"},
+    {"id": 6, "name": "Michael Jones", "department": "Engineering"},
+    {"id": 7, "name": "Sarah Davis", "department": "HR"},
+    {"id": 8, "name": "William Wilson", "department": "Finance"},
+    {"id": 9, "name": "Laura Taylor", "department": "Marketing"},
+    {"id": 10, "name": "James Miller", "department": "Sales"},
+    {"id": 11, "name": "Linda Moore", "department": "Engineering"},
+    {"id": 12, "name": "David Garcia", "department": "HR"},
+    {"id": 13, "name": "Mary Clark", "department": "Finance"},
+    {"id": 14, "name": "Richard Rodriguez", "department": "Marketing"},
+    {"id": 15, "name": "Patricia Hernandez", "department": "Sales"}
 ]
 
 # Helper function to find an employee by ID
@@ -19,6 +31,10 @@ def find_employee_by_id(employee_id):
 @app.route('/employees', methods=['GET'])
 def get_employees():
     return jsonify(employees)
+
+@app.route('/employees/count', methods=['GET'])
+def get_employee_count():
+    return jsonify({"count": len(employees)})
 
 @app.route('/employees/<int:employee_id>', methods=['GET'])
 def get_employee(employee_id):
@@ -59,7 +75,6 @@ def delete_employee(employee_id):
     
     employees.remove(employee)
     return jsonify({"message": "Employee deleted"})
-
 
 if __name__ == '__main__':
     app.run(debug=True)

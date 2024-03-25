@@ -1,2 +1,2 @@
 @echo off
-poetry run python app.py
+start cmd /k "poetry run python app.py"
