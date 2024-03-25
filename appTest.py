@@ -5,39 +5,33 @@ import time
 BASE_URL = 'http://127.0.0.1:5000'
 
 def test_get_employees():
-    response = requests.get(f'{BASE_URL}/employees')
-    
+    response = requests.get(f'{BASE_URL}/employees')    
     # Check response status
     assert response.status_code == 200, f"Expected status code 200, but got {response.status_code}"
-    
     # Check response time
     assert response.elapsed.total_seconds() < 1, "Response time is too high"
-    
     # Check return value
     data = response.json()
     assert isinstance(data, list), "Expected a list of employees"
-    assert len(data) == get_employee_count(), "Expected 5 employees"
+    assert len(data) == get_employee_count(), "Expected (" + get_employee_count() + ") of employees"
 
 def get_employee_count():
     response = requests.get(f'{BASE_URL}/employees/count')    
     # Check return value
     data = response.json()
-    return data["count"]
+    return data["count"] # returns the count of employees at that instance
 
 def test_get_employee_count():
     response = requests.get(f'{BASE_URL}/employees/count')
-    
     # Check response status
     assert response.status_code == 200, f"Expected status code 200, but got {response.status_code}"
-    
     # Check response time
     assert response.elapsed.total_seconds() < 1, "Response time is too high"
-    
     # Check return value
     data = response.json()
     assert isinstance(data, dict), "Expected a dictionary"
     assert "count" in data, "Expected 'count' key in response"
-    assert data["count"] == get_employee_count(), "Expected count to be 5"
+    assert data["count"] == get_employee_count(), "Expected (" + get_employee_count() + ") of employees"
 
 
 # Test POST New Employee
@@ -59,10 +53,13 @@ def test_update_employee():
 
 # Test DELETE Employee
 def test_delete_employee():
+    before_delete_employee_count = get_employee_count()
     response = requests.delete(f'{BASE_URL}/employees/1')
     assert response.status_code == 200
     assert response.elapsed.total_seconds() < 1
     assert response.json()["message"] == "Employee deleted"
+    after_delete_employee_count = get_employee_count()
+    assert before_delete_employee_count == after_delete_employee_count + 1, "Before ("+ str(before_delete_employee_count) +") and after delete count  ("+ str(after_delete_employee_count + 1)  +") should match"
 
 # Test Count of Employees
 def test_count_employees():
@@ -70,7 +67,7 @@ def test_count_employees():
     employee_count = len(response.json())
     assert response.status_code == 200
     assert response.elapsed.total_seconds() < 1
-    assert employee_count == get_employee_count()  # Assuming one employee was deleted in the previous test
+    assert employee_count == get_employee_count()
 
 # Test GET Single Employee
 def test_get_employee():
