@@ -139,7 +139,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/employees/1",
+					"raw": "http://127.0.0.1:5000/employees/12",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -150,7 +150,7 @@
 					"port": "5000",
 					"path": [
 						"employees",
-						"1"
+						"12"
 					]
 				}
 			},
@@ -234,20 +234,13 @@
 							"});\r",
 							"\r",
 							"// Parse the response body as JSON\r",
-							"try {\r",
-							"    const jsonData = pm.response.json();\r",
-							"    \r",
-							"    // Check the structure of the JSON object\r",
-							"    pm.test(\"Employee has updated name and department\", function () {\r",
-							"        pm.expect(jsonData).to.have.property('name', 'Updated Test Employee');\r",
-							"        pm.expect(jsonData).to.have.property('department', 'Updated Test Department');\r",
-							"    });\r",
-							"} catch (e) {\r",
-							"    // If parsing as JSON fails, check if it's an HTML error page\r",
-							"    pm.test(\"Response is not an HTML error page\", function () {\r",
-							"        pm.expect(pm.response.text()).to.not.include('<!doctype html>');\r",
-							"    });\r",
-							"}\r",
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"// Check the structure of the JSON object\r",
+							"pm.test(\"Employee has updated name and department\", function () {\r",
+							"    pm.expect(jsonData).to.have.property('name', 'Ravi Bhushan Konduru');\r",
+							"    pm.expect(jsonData).to.have.property('department', 'Delivery');\r",
+							"});\r",
 							""
 						],
 						"type": "text/javascript",
@@ -260,7 +253,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Ravi Bhushan Konduru\",\r\n    \"department\": \"Global Delivery\"\r\n}\r\n",
+					"raw": "{\r\n    \"name\": \"Ravi Bhushan Konduru\",\r\n    \"department\": \"Delivery\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
