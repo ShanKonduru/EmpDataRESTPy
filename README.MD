@@ -3,9 +3,13 @@
 This is a simple RESTful API built using Python's Flask framework to manage employee data. The API provides endpoints for performing CRUD operations (Create, Read, Update, Delete) on employee records.
 
 ## Features
+
 GET - Retrieve all employees or a specific employee by ID
+
 POST - Add a new employee
+
 PUT - Update an existing employee by ID
+
 DELETE - Delete an employee by ID
 
 ### Prerequisites
@@ -65,41 +69,70 @@ Content: JSON array of employee records
 
 #### Retrieve a Specific Employee
 URL: /employees/<employee_id>
+
 Method: GET
+
 Success Response:
+
 Code: 200 OK
+
 Content: JSON object of the specified employee
+
 Error Response:
+
 Code: 404 Not Found
+
 Content: { "error": "Employee not found" }
 
 #### Add a New Employee
 URL: /employees
+
 Method: POST
+
 Data Params: { "name": "John Doe", "department": "Engineering" }
+
 Success Response:
+
 Code: 201 Created
+
 Content: JSON object of the new employee
 
 #### Update an Existing Employee
+
 URL: /employees/<employee_id>
+
 Method: PUT
+
 Data Params: { "name": "John Doe Updated", "department": "Engineering" }
+
 Success Response:
+
 Code: 200 OK
+
 Content: JSON object of the updated employee
+
 Error Response:
+
 Code: 404 Not Found
+
 Content: { "error": "Employee not found" }
 
 #### Delete an Employee
+
 URL: /employees/<employee_id>
+
 Method: DELETE
+
 Success Response:
+
 Code: 200 OK
+
 Content: { "message": "Employee deleted" }
+
 Error Response:
+
 Code: 404 Not Found
+
 Content: { "error": "Employee not found" }
 
 ### Testing the API
