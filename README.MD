@@ -135,6 +135,26 @@ Code: 404 Not Found
 
 Content: { "error": "Employee not found" }
 
+Now you can use the following URLs to test the new functionalities:
+
+To get employees who belong to a specific department:
+
+```bash
+http://localhost:5000/employees?department=Engineering
+```
+
+To get all employees sorted by IDs in ascending or descending order:
+
+```bash 
+http://localhost:5000/employees?sort_by=id&order=ASC
+```
+or
+
+```bash 
+http://localhost:5000/employees?sort_by=id&order=DESC
+```
+This updated code should handle the new scenarios you've specified.
+
 ### Testing the API
 You can test the API using the requests library in Python or any API testing tool like Postman.
 
