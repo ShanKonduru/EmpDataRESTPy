@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "c9abfe7d-1af9-4c34-abbd-764bb14e6974",
+		"name": "DataDrivenTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33837572"
+	},
+	"item": [
+		{
+			"name": "DataDrivenAddNewEmployee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check the response status code\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// Parse the response body as JSON\r",
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"// Check the structure of the JSON object\r",
+							"pm.test(\"Employee has id, name, and department fields\", function () {\r",
+							"    pm.expect(jsonData).to.have.property('id');\r",
+							"    pm.expect(jsonData).to.have.property('name');\r",
+							"    pm.expect(jsonData).to.have.property('department');\r",
+							"});\r",
+							"\r",
+							"// Extract data from the current iteration\r",
+							"var name = pm.iterationData.get(\"name\");\r",
+							"var department = pm.iterationData.get(\"department\");\r",
+							"\r",
+							"// Test the structure of the JSON object\r",
+							"pm.test(\"Employee has id, name, and department fields\", function () {\r",
+							"    pm.expect(jsonData).to.have.property('id');\r",
+							"    pm.expect(jsonData).to.have.property('name', name);\r",
+							"    pm.expect(jsonData).to.have.property('department', department);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"department\": \"{{department}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/employees",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
