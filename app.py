@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from operator import itemgetter
 
 app = Flask(__name__)
 
@@ -75,6 +76,24 @@ def delete_employee(employee_id):
     
     employees.remove(employee)
     return jsonify({"message": "Employee deleted"})
+
+@app.route('/sort_employees', methods=['GET'])
+def get_employees_sorted():
+    department = request.args.get('department')
+    sort_by = request.args.get('sort_by')
+    order = request.args.get('order')
+
+    filtered_employees = employees
+    if department:
+        filtered_employees = [employee for employee in employees if employee["department"] == department]
+
+    if sort_by:
+        if order == 'ASC':
+            filtered_employees = sorted(filtered_employees, key=itemgetter(sort_by.lower()))
+        elif order == 'DESC':
+            filtered_employees = sorted(filtered_employees, key=itemgetter(sort_by.lower()), reverse=True)
+
+    return jsonify(filtered_employees)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
